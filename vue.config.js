@@ -3,7 +3,7 @@ module.exports = {
     "vuetify"
   ],
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/color-change-image/'
+    ? '/lsb-watermark/'
     : '/',
   devServer: {
     disableHostCheck: true,

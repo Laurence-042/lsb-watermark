@@ -1,4 +1,4 @@
-# color-change-image
+# lsb-watermark
 
 ## Project setup
 ```
