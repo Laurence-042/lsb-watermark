@@ -21,7 +21,7 @@
       <v-btn @click="process" text>执行</v-btn>
 
       <v-btn
-        href="https://github.com/Laurence-042/color-change-image"
+        href="https://github.com/Laurence-042/lsb-watermark"
         target="_blank"
         text
       >
@@ -37,26 +37,22 @@
             <p class="text-center text-h6">请先在顶栏处选取图片</p>
             <p class="text-center">使用方法：</p>
             <ol>
-              <li>点击顶栏上传图片</li>
-              <li>通过点击在图片中选中将要成为变色图变色部分的颜色</li>
               <li>
-                在侧边栏中选择标记器（marker）进行标记，使用左键点击设置标记点，右键点击移除标记点（可选）
+                添加水印
                 <ol>
-                  <li>
-                    相似颜色标记器：选中与标记点相连通的，颜色差异小于阈值的区域
-                  </li>
-                  <li>曲线标记器：利用标记点圈出待处理区域的路径</li>
+                  <li>使用顶栏左侧上传待处理图片</li>
+                  <li>使用顶栏右侧上传作为水印的图片</li>
+                  <li>点击顶栏上的“执行”按钮</li>
                 </ol>
               </li>
               <li>
-                使用标记区操作蒙版（mask），进行加工时会将当前标记区加入蒙版后，将蒙版区域当作待加工区域（可选）
+                提取水印
+                <ol>
+                  <li>使用顶栏左侧上传待处理图片</li>
+                  <li>（右侧留空）</li>
+                  <li>点击顶栏上的“执行”按钮</li>
+                </ol>
               </li>
-              <li>点“开始加工”按钮</li>
-              <li>
-                耐心等待加工完成，然后使用切换主题或者自定义背景色按钮来调整背景颜色预览变色图效果
-              </li>
-              <li>提示：替换对比度较低且不过亮过暗的颜色效果会比较好</li>
-              <li>提示：按住左键可以拖动图片，滚轮可以缩放图片</li>
             </ol>
           </div>
 
@@ -103,11 +99,11 @@ export default {
   },
   methods: {
     selectMainImage(file) {
-      if(file==null){
-        this.firstImg=null
-        this.secondImg=null
-        this.imageOut=null
-        return
+      if (file == null) {
+        this.firstImg = null;
+        this.secondImg = null;
+        this.imageOut = null;
+        return;
       }
       this.selectImage(file, (img) => {
         let ctx = this.main_canvas.getContext("2d");
@@ -118,9 +114,9 @@ export default {
       });
     },
     selectSecondImage(file) {
-      if(file==null){
-        this.secondImg=null
-        return
+      if (file == null) {
+        this.secondImg = null;
+        return;
       }
       if (this.firstImg == null) {
         console.log("main first");
@@ -218,9 +214,9 @@ export default {
           let mainPix = ImageToolKit.getPixel(mainImage, i, j);
           let secondPix = ImageToolKit.getPixel(secondImage, i, j);
 
-          if(i==100&&j==100){
-            console.log(mainPix)
-            console.log(secondPix)
+          if (i == 100 && j == 100) {
+            console.log(mainPix);
+            console.log(secondPix);
           }
 
           mainPix.r =
@@ -230,8 +226,8 @@ export default {
           mainPix.b =
             Math.floor(mainPix.b / 4) * 4 + Math.floor(secondPix.b / 64);
 
-          if(i==100&&j==100){
-            console.log(mainPix)
+          if (i == 100 && j == 100) {
+            console.log(mainPix);
           }
 
           ImageToolKit.setPixel(mainImage, i, j, mainPix);
@@ -260,16 +256,16 @@ export default {
         for (let j = 0; j < mainImage.width; j++) {
           let mainPix = ImageToolKit.getPixel(mainImage, i, j);
 
-          if(i==100&&j==100){
-            console.log(mainPix)
+          if (i == 100 && j == 100) {
+            console.log(mainPix);
           }
 
           mainPix.r = (mainPix.r % 4) * 64;
           mainPix.g = (mainPix.g % 4) * 64;
           mainPix.b = (mainPix.b % 4) * 64;
 
-          if(i==100&&j==100){
-            console.log(mainPix)
+          if (i == 100 && j == 100) {
+            console.log(mainPix);
           }
 
           ImageToolKit.setPixel(mainImage, i, j, mainPix);
